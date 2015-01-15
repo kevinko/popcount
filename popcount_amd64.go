@@ -11,6 +11,7 @@ var haveSsse3 = checkHaveSsse3()
 // Tests for Supplemental SSE3 support.
 func checkHaveSsse3() bool
 
+// This is like PopCountData, only SSSE3 optimized if such instructions are supported.
 func PopCount(v []byte) int {
 	if haveSsse3 {
 		return popCountSsse3(v)

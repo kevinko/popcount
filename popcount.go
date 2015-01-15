@@ -4,6 +4,7 @@
 
 package popcount
 
+// bithacks-based implementation in go for 32-bit values.
 func PopCount32(v uint32) int {
 	/*
 	  This is taken from bithacks.
@@ -96,6 +97,7 @@ func PopCount32(v uint32) int {
 	return int(c)
 }
 
+// bithacks-based implementation in go for 64-bit values.
 func PopCount64(v uint64) int {
 	v = v - ((v >> 1) & 0x5555555555555555)
 	v = (v & 0x3333333333333333) + ((v >> 2) & 0x3333333333333333)
@@ -103,6 +105,8 @@ func PopCount64(v uint64) int {
 	return int(c)
 }
 
+// Processes a byte slice using both PopCount32 and PopCount64 (i.e., native go).
+// This is primarily for benchmarking.  Use PopCount() if SSSE3 is desired.
 func PopCountData(data []byte) int {
 	count := 0
 	ii := 0
